@@ -1,0 +1,17 @@
+
+.vs/
+*.user
+*.suo
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+*.exe
+*.obj
+*.pdb
+*.log
+
+ipch/
+*.ipch
