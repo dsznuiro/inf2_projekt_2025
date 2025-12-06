@@ -1,12 +1,11 @@
 #include "game.hpp"
 #include <iostream>
 
-Game::Game() :
+Game::Game()
+    : m_width(800), m_height(600), m_frame(0),
     m_pilka(320, 280, 4, 3, 8),
     m_paletka(320, 440, 100, 20, 8)
-
 {
-
     const int ILOSC_KOLUMN = 6;
     const int ILOSC_WIERSZY = 7;
     float ROZMIAR_BLOKU_X = (m_width - (ILOSC_KOLUMN - 1) * 2.f) / ILOSC_KOLUMN;
@@ -21,7 +20,18 @@ Game::Game() :
         }
     }
 }
+Paletka& Game::getPaletka() {
+    return m_paletka;
+}
 
+float Game::getWidth() const {
+    return m_width;
+}
+
+
+float Game::getHeight() const {
+    return m_height;
+}
 
 void Game::render(sf::RenderTarget& target) {
     //rysowanie blokow
@@ -69,3 +79,4 @@ void Game::update(sf::Time dt) {
         }
     }
 }
+

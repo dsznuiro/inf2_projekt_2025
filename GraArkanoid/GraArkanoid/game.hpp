@@ -8,19 +8,18 @@
 
 class Game {
 private:
-    int m_frame;
-    float m_width;
-    float m_height;
+    int m_frame = 0;
+    float m_width = 800;
+    float m_height = 600;
     Paletka m_paletka;
     Pilka m_pilka;
     std::vector<Stone> m_bloki;
 
-    // Metody prywatne (wywo³ywane wewn¹trz run())
-    void processEvents();
+public:
+    Game();
     void update(sf::Time dt);
     void render(sf::RenderTarget& target);
-
-public:
-    // Konstruktor i g³ówna metoda uruchamiaj¹ca
-    Game();
+    Paletka& getPaletka();
+    float getWidth() const;
+    float getHeight() const;
 };
