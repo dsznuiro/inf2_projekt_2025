@@ -9,6 +9,7 @@ private:
 	static const std::array<sf::Color, 4> m_colorLUT;
 public:
 	Stone(sf::Vector2f startPos, sf::Vector2f rozmiar, int L);
+	int getHP() const;
 	void trafienie();
 	void aktualizujKolor();
 	bool czyZniszczony() const;

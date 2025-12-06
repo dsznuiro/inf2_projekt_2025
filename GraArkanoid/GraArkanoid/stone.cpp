@@ -36,3 +36,7 @@ sf::Color::Blue // L = 3
 bool Stone::czyZniszczony() const {
 	return m_jestZniszczony;
 }
+
+int Stone::getHP() const {
+	return m_punktyZycia;
+}
