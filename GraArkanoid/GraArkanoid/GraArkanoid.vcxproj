@@ -19,9 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="paletka.cpp" />
+    <ClCompile Include="pilka.cpp" />
+    <ClCompile Include="stone.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="game.hpp" />
+    <ClInclude Include="menu.hpp" />
     <ClInclude Include="paletka.hpp" />
     <ClInclude Include="pilka.hpp" />
     <ClInclude Include="stone.hpp" />
