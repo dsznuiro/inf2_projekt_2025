@@ -32,6 +32,10 @@ void Paletka::draw(sf::RenderTarget& target) {
 	target.draw(shape);
 }
 
+void Paletka::setPosition(const sf::Vector2f& pos) {
+	shape.setPosition(pos);
+}
+
 float Paletka::getX() const { return x; }
 float Paletka::getY() const { return y; }
 float Paletka::getSzerokosc() const { return szerokosc; }

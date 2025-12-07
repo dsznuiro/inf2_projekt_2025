@@ -20,6 +20,8 @@ public:
     void update(sf::Time dt);
     void render(sf::RenderTarget& target);
     Paletka& getPaletka();
+    Pilka& getPilka();
     float getWidth() const;
     float getHeight() const;
+    std::vector<Stone>& getBlocks();
 };

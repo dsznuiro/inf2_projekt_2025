@@ -20,6 +20,7 @@ public:
 	float getY() const;
 	float getSzerokosc() const;
 	float getWysokosc() const;
+	void setPosition(const sf::Vector2f& pos);
 };
 
 

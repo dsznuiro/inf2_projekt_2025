@@ -58,6 +58,16 @@ void Pilka::draw(sf::RenderTarget& target) {
 	target.draw(shape);
 }
 
+void Pilka::setPositionAndVelocity(const sf::Vector2f& pos, const sf::Vector2f& vel) {
+	shape.setPosition(pos);
+
+	x = pos.x;
+	y = pos.y;
+
+	vx = vel.x;
+	vy = vel.y;
+}
+
 float Pilka::getX() const { return x; }
 float Pilka::getY() const { return y; }
 float Pilka::getVx() const { return vx; }

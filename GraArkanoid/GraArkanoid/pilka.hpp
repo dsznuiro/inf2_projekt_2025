@@ -25,5 +25,6 @@ public:
 	float getVy() const;
 	float getRadius() const;
 	sf::FloatRect getGlobalBounds() const;
+	void setPositionAndVelocity(const sf::Vector2f& pos, const sf::Vector2f& vel);
 };
 

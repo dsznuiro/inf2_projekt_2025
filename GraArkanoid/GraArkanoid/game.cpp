@@ -24,6 +24,10 @@ Paletka& Game::getPaletka() {
     return m_paletka;
 }
 
+Pilka& Game::getPilka() {
+    return m_pilka;
+}
+
 float Game::getWidth() const {
     return m_width;
 }
@@ -31,6 +35,10 @@ float Game::getWidth() const {
 
 float Game::getHeight() const {
     return m_height;
+}
+
+std::vector<Stone>& Game::getBlocks() {
+    return m_bloki;
 }
 
 void Game::render(sf::RenderTarget& target) {

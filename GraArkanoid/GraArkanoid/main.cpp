@@ -2,7 +2,7 @@
 #include <iostream>
 #include "game.hpp"
 #include "menu.hpp"
-
+#include "gamestate.hpp"
 
 enum class GameState { Menu, Playing, Scores, Exiting };
 
@@ -25,28 +25,53 @@ int main()
             }
 
             if (event.type == sf::Event::KeyPressed) {
+
+
                 if (currentState == GameState::Menu) {
-                    if (event.key.code == sf::Keyboard::Up) {
-                        menu.przesunG();
-                    }
-                    if (event.key.code == sf::Keyboard::Down) {
-                        menu.przesunD();
-                    }
+                    if (event.key.code == sf::Keyboard::Up) { menu.przesunG(); }
+                    if (event.key.code == sf::Keyboard::Down) { menu.przesunD(); }
 
                     if (event.key.code == sf::Keyboard::Enter) {
                         if (menu.getSelectedItem() == 0) {
                             currentState = GameState::Playing;
                         }
-                        else if (menu.getSelectedItem() == 2) {
+                        else if (menu.getSelectedItem() == 1) {
+
+                            GameStatus loadedState;
+
+                            if (loadedState.loadFromFile("savegame.txt")) {
+                                loadedState.apply(game.getPaletka(), game.getPilka(), game.getBlocks());
+                                currentState = GameState::Playing;
+                                std::cout << "\nGra wczytana!\n";
+                            }
+                            else {
+                                std::cerr << "\nNie udalo sie wczytac gry!\n";
+                            }
+                        }
+                        else if (menu.getSelectedItem() == 3) {
                             currentState = GameState::Exiting;
                         }
                     }
                 }
-                else if (currentState == GameState::Playing && event.key.code == sf::Keyboard::Escape) {
+
+                if (event.key.code == sf::Keyboard::F5) {
+                    GameStatus snapshot;
+
+                    snapshot.capture(game.getPaletka(), game.getPilka(), game.getBlocks());
+
+                    if (snapshot.saveToFile("savegame.txt")) {
+                        std::cout << "\nGra zapisana!\n";
+                    }
+                    else {
+                        std::cout << "\nNie udalo sie zapisac gry!\n";
+                    }
+                }
+
+                if (currentState == GameState::Playing && event.key.code == sf::Keyboard::Escape) {
                     currentState = GameState::Menu;
                 }
             }
-        } 
+        }
 
         switch (currentState) {
         case GameState::Playing:
@@ -65,7 +90,6 @@ int main()
             window.close();
             break;
         }
-
 
         window.clear(sf::Color::Black);
 
