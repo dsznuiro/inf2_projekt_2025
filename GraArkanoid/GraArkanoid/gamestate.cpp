@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 void GameStatus::capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& s) {
     paddlePosition = sf::Vector2f(p.getX(), p.getY());
@@ -103,8 +104,7 @@ bool GameStatus::loadFromFile(const std::string& filename) {
     std::cout << "Stan gry wczytany.\n";
     return true;
 }
-void GameStatus::apply(Paletka& p, Pilka& b, std::vector<Stone>& stones) {
-
+void GameStatus::apply(Paletka& p, Pilka& b, std::vector<Stone>& stones, const sf::Texture& blockTexture) {
     p.setPosition(paddlePosition);
 
     b.setPositionAndVelocity(ballPosition, ballVelocity);
@@ -113,6 +113,6 @@ void GameStatus::apply(Paletka& p, Pilka& b, std::vector<Stone>& stones) {
     sf::Vector2f size(133.667f, 25.f);
 
     for (const auto& data : blocks) {
-        stones.emplace_back(sf::Vector2f(data.x, data.y), size, data.hp);
+        stones.emplace_back(sf::Vector2f(data.x, data.y), size, data.hp, blockTexture);
     }
 }

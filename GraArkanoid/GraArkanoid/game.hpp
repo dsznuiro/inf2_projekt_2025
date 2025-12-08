@@ -14,6 +14,7 @@ private:
     Paletka m_paletka;
     Pilka m_pilka;
     std::vector<Stone> m_bloki;
+    sf::Texture m_blockTexture;
 
 public:
     Game();
@@ -24,4 +25,5 @@ public:
     float getWidth() const;
     float getHeight() const;
     std::vector<Stone>& getBlocks();
+    const sf::Texture& getBlockTexture() const { return m_blockTexture; }
 };

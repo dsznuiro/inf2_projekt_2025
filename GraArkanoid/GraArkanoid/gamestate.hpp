@@ -2,6 +2,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <vector>
 #include <string>
+#include <SFML/Graphics.hpp>
 
 struct BlockData {
     float x, y;
@@ -31,5 +32,5 @@ public:
     const sf::Vector2f& getBallVelocity() const { return ballVelocity; }
     bool saveToFile(const std::string& filename) const;
     bool loadFromFile(const std::string& filename);
-    void apply(Paletka& p, Pilka& b, std::vector<Stone>& stones);
+    void apply(Paletka& p, Pilka& b, std::vector<Stone>& stones, const sf::Texture& blockTexture);
 };

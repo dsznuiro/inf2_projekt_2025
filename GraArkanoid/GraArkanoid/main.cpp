@@ -40,7 +40,7 @@ int main()
                             GameStatus loadedState;
 
                             if (loadedState.loadFromFile("savegame.txt")) {
-                                loadedState.apply(game.getPaletka(), game.getPilka(), game.getBlocks());
+                                loadedState.apply(game.getPaletka(), game.getPilka(), game.getBlocks(),game.getBlockTexture());
                                 currentState = GameState::Playing;
                                 std::cout << "\nGra wczytana!\n";
                             }
