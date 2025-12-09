@@ -40,7 +40,7 @@ int main()
                             GameStatus loadedState;
 
                             if (loadedState.loadFromFile("savegame.txt")) {
-                                loadedState.apply(game.getPaletka(), game.getPilka(), game.getBlocks(),game.getBlockTexture());
+                                loadedState.apply(game.getPaletka(), game.getPilka(), game.getBlocks(), game.getBlockTexture(), game );
                                 currentState = GameState::Playing;
                                 std::cout << "\nGra wczytana!\n";
                             }
@@ -57,9 +57,10 @@ int main()
                 if (event.key.code == sf::Keyboard::F5) {
                     GameStatus snapshot;
 
-                    snapshot.capture(game.getPaletka(), game.getPilka(), game.getBlocks());
+                    snapshot.capture(game.getPaletka(), game.getPilka(), game.getBlocks(), game);
 
                     if (snapshot.saveToFile("savegame.txt")) {
+
                         std::cout << "\nGra zapisana!\n";
                     }
                     else {

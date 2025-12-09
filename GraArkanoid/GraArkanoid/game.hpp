@@ -15,6 +15,9 @@ private:
     Pilka m_pilka;
     std::vector<Stone> m_bloki;
     sf::Texture m_blockTexture;
+    int m_score = 0;
+    sf::Font m_font;
+    sf::Text m_scoreText;
 
 public:
     Game();
@@ -26,4 +29,6 @@ public:
     float getHeight() const;
     std::vector<Stone>& getBlocks();
     const sf::Texture& getBlockTexture() const { return m_blockTexture; }
+    int getScore() const { return m_score; }
+    void setScore(int s) { m_score = s; }
 };

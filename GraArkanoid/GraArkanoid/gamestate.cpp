@@ -6,14 +6,15 @@
 #include <string>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "game.hpp"
 
-void GameStatus::capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& s) {
+void GameStatus::capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& s, const Game& g) {
     paddlePosition = sf::Vector2f(p.getX(), p.getY());
-
     ballPosition = sf::Vector2f(b.getX(), b.getY());
     ballVelocity = sf::Vector2f(b.getVx(), b.getVy());
 
     blocks.clear();
+    score = g.getScore();
 
     for (const auto& stone : s) {
         if (!stone.czyZniszczony()) {
@@ -21,6 +22,8 @@ void GameStatus::capture(const Paletka& p, const Pilka& b, const std::vector<Sto
             sf::Vector2f pos = stone.getPosition();
 
             blocks.emplace_back(pos.x, pos.y, stone.getHP());
+
+
         }
     }
 }
@@ -36,6 +39,9 @@ bool GameStatus::saveToFile(const std::string& filename) const {
 
     // Zapis Pi³ki
     file << "BALL " << ballPosition.x << " " << ballPosition.y << " " << ballVelocity.x << " " << ballVelocity.y << "\n";
+
+    // Zapis wyniku
+    file << "SCORE " << score << "\n";
 
     // Zapis liczby bloków
     file << "BLOCKS_COUNT " << blocks.size() << "\n";
@@ -77,6 +83,17 @@ bool GameStatus::loadFromFile(const std::string& filename) {
         return false;
     }
 
+    if (file >> label >> score) {
+        if (label != "SCORE") {
+            std::cerr << "Oczekiwano SCORE.\n";
+            return false;
+        }
+    }
+    else {
+        std::cerr << "Brak danych dla SCORE.\n";
+        return false;
+    }
+
     int blocksCount;
     if (file >> label >> blocksCount) {
         if (label != "BLOCKS_COUNT") {
@@ -104,14 +121,13 @@ bool GameStatus::loadFromFile(const std::string& filename) {
     std::cout << "Stan gry wczytany.\n";
     return true;
 }
-void GameStatus::apply(Paletka& p, Pilka& b, std::vector<Stone>& stones, const sf::Texture& blockTexture) {
+void GameStatus::apply(Paletka& p, Pilka& b, std::vector<Stone>& stones, const sf::Texture& blockTexture, Game& g) {
     p.setPosition(paddlePosition);
-
     b.setPositionAndVelocity(ballPosition, ballVelocity);
-
     stones.clear();
-    sf::Vector2f size(133.667f, 25.f);
 
+    sf::Vector2f size(133.667f, 25.f);
+    g.setScore(score);
     for (const auto& data : blocks) {
         stones.emplace_back(sf::Vector2f(data.x, data.y), size, data.hp, blockTexture);
     }

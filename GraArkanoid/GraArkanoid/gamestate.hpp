@@ -14,6 +14,7 @@ struct BlockData {
 class Paletka;
 class Pilka;
 class Stone;
+class Game;
 
 class GameStatus {
 private:
@@ -21,10 +22,10 @@ private:
     sf::Vector2f ballPosition;
     sf::Vector2f ballVelocity;
     std::vector<BlockData> blocks;
+    int score;
 
 public:
-    void capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& s);
-
+    void capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& s, const Game& g);
     const std::vector<BlockData>& getBlocks() const { return blocks; }
 
     const sf::Vector2f& getPaddlePosition() const { return paddlePosition; }
@@ -32,5 +33,5 @@ public:
     const sf::Vector2f& getBallVelocity() const { return ballVelocity; }
     bool saveToFile(const std::string& filename) const;
     bool loadFromFile(const std::string& filename);
-    void apply(Paletka& p, Pilka& b, std::vector<Stone>& stones, const sf::Texture& blockTexture);
+    void apply(Paletka& p, Pilka& b, std::vector<Stone>& stones, const sf::Texture& blockTexture, Game& g);
 };

@@ -77,3 +77,15 @@ float Pilka::getRadius() const { return radius; }
 sf::FloatRect Pilka::getGlobalBounds() const {
 	return shape.getGlobalBounds();
 }
+
+void Pilka::setRadius(float r_in) {
+	radius = r_in;
+	shape.setRadius(radius);
+	shape.setOrigin(radius, radius);
+	shape.setPosition(x, y);
+}
+
+void Pilka::setVelocity(float vx_in, float vy_in) {
+	vx = vx_in;
+	vy = vy_in;
+}
