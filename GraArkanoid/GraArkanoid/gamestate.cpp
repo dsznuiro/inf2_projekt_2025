@@ -15,6 +15,7 @@ void GameStatus::capture(const Paletka& p, const Pilka& b, const std::vector<Sto
 
     blocks.clear();
     score = g.getScore();
+    ballRadius = b.getRadius();
 
     for (const auto& stone : s) {
         if (!stone.czyZniszczony()) {
@@ -38,8 +39,7 @@ bool GameStatus::saveToFile(const std::string& filename) const {
     file << "PADDLE " << paddlePosition.x << " " << paddlePosition.y << "\n";
 
     // Zapis Pi³ki
-    file << "BALL " << ballPosition.x << " " << ballPosition.y << " " << ballVelocity.x << " " << ballVelocity.y << "\n";
-
+    file << "BALL " << ballPosition.x << " " << ballPosition.y << " " << ballVelocity.x << " " << ballVelocity.y << " " << ballRadius << "\n";
     // Zapis wyniku
     file << "SCORE " << score << "\n";
 
@@ -72,7 +72,7 @@ bool GameStatus::loadFromFile(const std::string& filename) {
         return false;
     }
 
-    if (file >> label >> ballPosition.x >> ballPosition.y >> ballVelocity.x >> ballVelocity.y) {
+    if (file >> label >> ballPosition.x >> ballPosition.y >> ballVelocity.x >> ballVelocity.y >> ballRadius) {
         if (label != "BALL") {
             std::cerr << "Oczekiwano BALL.\n";
             return false;
@@ -124,6 +124,7 @@ bool GameStatus::loadFromFile(const std::string& filename) {
 void GameStatus::apply(Paletka& p, Pilka& b, std::vector<Stone>& stones, const sf::Texture& blockTexture, Game& g) {
     p.setPosition(paddlePosition);
     b.setPositionAndVelocity(ballPosition, ballVelocity);
+    b.setRadius(ballRadius);
     stones.clear();
 
     sf::Vector2f size(133.667f, 25.f);

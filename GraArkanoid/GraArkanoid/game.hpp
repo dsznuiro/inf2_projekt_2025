@@ -18,6 +18,7 @@ private:
     int m_score = 0;
     sf::Font m_font;
     sf::Text m_scoreText;
+    sf::Texture m_paddleTexture;
 
 public:
     Game();

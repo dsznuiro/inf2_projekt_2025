@@ -2,10 +2,7 @@
 #include <iostream>
 
 Game::Game()
-    : m_width(800), m_height(600), m_frame(0),
-    m_pilka(320, 280, 4, 3, 8),
-    m_paletka(320, 440, 100, 20, 8)
-{
+    : m_width(800), m_height(600), m_frame(0), m_pilka(320, 280, 4, 3, 8) {
     const int ILOSC_KOLUMN = 6;
     const int ILOSC_WIERSZY = 7;
     float ROZMIAR_BLOKU_X = (m_width - (ILOSC_KOLUMN - 1) * 2.f) / ILOSC_KOLUMN;
@@ -14,6 +11,11 @@ Game::Game()
     if (!m_blockTexture.loadFromFile("bloki3stany.png")) {
         std::cerr << "Blad ladowania tekstury.\n";
     }
+
+    if (!m_paddleTexture.loadFromFile("paletka.png")) {
+        std::cerr << "Blad ladowania tekstury paletki!\n";
+    }
+    m_paletka = Paletka(320, 440, 100, 20, 8, m_paddleTexture);
 
     if (!m_font.loadFromFile("arial.ttf")) {
         std::cerr << "Blad ladowania czcionki!'.\n";

@@ -23,6 +23,7 @@ private:
     sf::Vector2f ballVelocity;
     std::vector<BlockData> blocks;
     int score;
+    float ballRadius;
 
 public:
     void capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& s, const Game& g);

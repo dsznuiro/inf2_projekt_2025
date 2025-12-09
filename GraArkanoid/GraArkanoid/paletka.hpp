@@ -11,7 +11,7 @@ private:
 	float predkosc;
 	sf::RectangleShape shape;
 public:
-	Paletka(float x_in, float y_in, float szerokosc_in, float wysokosc_in, float predkosc_in);
+	Paletka(float x_in, float y_in, float szerokosc_in, float wysokosc_in, float predkosc_in, const sf::Texture& texture);
 	void moveLeft();
 	void moveRight();
 	void clampToBounds(float width);
@@ -21,6 +21,8 @@ public:
 	float getSzerokosc() const;
 	float getWysokosc() const;
 	void setPosition(const sf::Vector2f& pos);
+	Paletka() = default;
+
 };
 
 
