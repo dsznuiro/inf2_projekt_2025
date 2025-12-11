@@ -1,13 +1,13 @@
 ***Tytuł:*** Arkanoid++  
 ***Autor:*** Maciej Pawłowski
 
-***Dodatkowe elementy:  ***
+***Dodatkowe elementy:***  
 -ekran przegranej/wygranej  
 -widoczna punktacja  
 -zmieniajaca się prędkość piłki oraz jej promień (pod wpływem zdobytych punktów)  
 -użycie tekstur  
 
-***Sterowanie:  ***
+***Sterowanie:***  
 -A/D <-/-> (strzalki) - sterowanie paletką na boki  
 -enter - do akceptacji wyboru w menu oraz wyjscia po ekranie koncowym  
 -esc - do wyjscia do menu głównego w trakcie gry  
