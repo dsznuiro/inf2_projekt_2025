@@ -4,7 +4,7 @@
 #include "menu.hpp"
 #include "gamestate.hpp"
 
-enum class GameState { Menu, Playing, Scores, Exiting };
+enum class GameState { Menu, Playing, Scores, Exiting, GameOver, GameWon };
 
 int main()
 {
@@ -33,6 +33,7 @@ int main()
 
                     if (event.key.code == sf::Keyboard::Enter) {
                         if (menu.getSelectedItem() == 0) {
+                            game.resetGame();
                             currentState = GameState::Playing;
                         }
                         else if (menu.getSelectedItem() == 1) {
@@ -48,7 +49,7 @@ int main()
                                 std::cerr << "\nNie udalo sie wczytac gry!\n";
                             }
                         }
-                        else if (menu.getSelectedItem() == 3) {
+                        else if (menu.getSelectedItem() == 2) {
                             currentState = GameState::Exiting;
                         }
                     }
@@ -74,6 +75,18 @@ int main()
             }
         }
 
+        if (currentState == GameState::GameOver && event.key.code == sf::Keyboard::Enter) {
+            currentState = GameState::Exiting;
+        }
+
+        if (currentState == GameState::GameWon && event.key.code == sf::Keyboard::Enter) {
+            currentState = GameState::Exiting;
+        }
+
+        if (currentState == GameState::Playing && event.key.code == sf::Keyboard::Escape) {
+            currentState = GameState::Menu;
+        }
+
         switch (currentState) {
         case GameState::Playing:
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
@@ -85,6 +98,12 @@ int main()
             game.getPaletka().clampToBounds(game.getWidth());
 
             game.update(dt);
+            if (game.isGameOver()) {
+                currentState = GameState::GameOver;
+            }
+            else if (game.isGameWon()) {
+                currentState = GameState::GameWon;
+            }
             break;
 
         case GameState::Exiting:
@@ -100,7 +119,12 @@ int main()
         else if (currentState == GameState::Playing) {
             game.render(window);
         }
-
+        else if (currentState == GameState::GameOver) {
+            game.drawGameOver(window);
+        }
+        else if (currentState == GameState::GameWon) {
+            game.drawGameWon(window);
+        }
         window.display();
     }
 

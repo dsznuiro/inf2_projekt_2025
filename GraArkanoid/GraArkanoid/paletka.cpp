@@ -34,6 +34,8 @@ void Paletka::draw(sf::RenderTarget& target) {
 }
 
 void Paletka::setPosition(const sf::Vector2f& pos) {
+	x = pos.x;
+	y = pos.y;
 	shape.setPosition(pos);
 }
 

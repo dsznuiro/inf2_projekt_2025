@@ -12,6 +12,7 @@ private:
 	float radius;
 	sf::CircleShape shape;
 public:
+
 	Pilka(float x_in, float y_in, float vx_in, float vy_in, float r_in);
 	void move();
 	void bounceX();

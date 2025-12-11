@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include "game.hpp"
 
+
 void GameStatus::capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& s, const Game& g) {
     paddlePosition = sf::Vector2f(p.getX(), p.getY());
     ballPosition = sf::Vector2f(b.getX(), b.getY());
@@ -51,6 +52,7 @@ bool GameStatus::saveToFile(const std::string& filename) const {
         file << block.x << " " << block.y << " " << block.hp << "\n";
     }
 
+    file.flush();
     file.close();
     return true;
 }
