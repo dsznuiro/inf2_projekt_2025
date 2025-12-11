@@ -6,13 +6,11 @@ class Stone : public sf::RectangleShape {
 private:
 	int m_punktyZycia;
 	bool m_jestZniszczony;
-	//static const std::array<sf::Color, 4> m_colorLUT;
 public:
-	Stone(sf::Vector2f startPos, sf::Vector2f rozmiar, int L, const sf::Texture& texture);
-	int getHP() const;
-	void trafienie();
-	//void aktualizujKolor();
-	void aktualizujTeksture();
-	bool czyZniszczony() const;
+	Stone(sf::Vector2f startPos, sf::Vector2f rozmiar, int L, const sf::Texture& texture); //konstrutkor (dodatkowo z tekstura)
+	int getHP() const; //getter
+	void trafienie(); //zmniejsza hp i aktualizuje teksture
+	void aktualizujTeksture(); //ustawia poprawna teksture
+	bool czyZniszczony() const;	//sprawdza czy blok ma 0 hp
 };
 

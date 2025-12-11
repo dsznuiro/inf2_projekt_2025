@@ -20,9 +20,11 @@ void Paletka::moveRight() {
 }
 
 void Paletka::clampToBounds(float width) {
+	//lewa granica
 	if (x - szerokosc / 2 < 0) {
 		x = szerokosc / 2;
 	}
+	//prawa granica
 	if (x + szerokosc / 2 > width) {
 		x = width - szerokosc / 2;
 	}
@@ -32,13 +34,14 @@ void Paletka::clampToBounds(float width) {
 void Paletka::draw(sf::RenderTarget& target) {
 	target.draw(shape);
 }
-
+// nowa pozycja paletki (wymagane do wczytania gry)
 void Paletka::setPosition(const sf::Vector2f& pos) {
 	x = pos.x;
 	y = pos.y;
 	shape.setPosition(pos);
 }
 
+//gettery
 float Paletka::getX() const { return x; }
 float Paletka::getY() const { return y; }
 float Paletka::getSzerokosc() const { return szerokosc; }

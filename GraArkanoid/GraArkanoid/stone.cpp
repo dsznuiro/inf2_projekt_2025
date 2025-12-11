@@ -5,40 +5,26 @@ Stone::Stone(sf::Vector2f startPos, sf::Vector2f rozmiar, int L, const sf::Textu
 {
 	this->setPosition(startPos);
 	this->setSize(rozmiar);
-	//setOutlineThickness(2.f);
-	//aktualizujKolor();
-	this->setTexture(&texture);
+	this->setTexture(&texture);	//przypisane tekstury
 
 	aktualizujTeksture();
 }
 
+//zmniejsza hp po trafieniu i aktualizuje teksture
 void Stone::trafienie() {
 	if (m_jestZniszczony) {
 		return;
 	};
 	--m_punktyZycia;
-	//aktualizujKolor();
 	aktualizujTeksture();
 	if (m_punktyZycia <= 0) {
-		m_jestZniszczony = true;
+		m_jestZniszczony = true; //jesli blok ma 0 hp to zostaje zniszczony
 	};
 }
 
-//void Stone::aktualizujKolor() {
-//	if (m_punktyZycia >= 0 && m_punktyZycia <= 3) {
-//		this->setFillColor(m_colorLUT[m_punktyZycia]);
-//	}
-//}
-
-//const std::array<sf::Color, 4> Stone::m_colorLUT = {
-//sf::Color::Transparent, // L = 0
-//sf::Color::Red, // L = 1
-//sf::Color::Yellow, // L = 2
-//sf::Color::Blue // L = 3
-//};
 
 void Stone::aktualizujTeksture() {
-
+	//zastosowano sprite do optymalizacji pliku png (wystarczy tylko jeden plik png ktory odzwierciedla 3 stany)
     const int wysokosc_klatki = 25;
 
     if (m_punktyZycia <= 0) {
@@ -47,14 +33,16 @@ void Stone::aktualizujTeksture() {
     }
 
     int wierszTextury = 3 - m_punktyZycia;
-
+	//x jest zawsze rowny 0 a y odpowiednio 0,25,50
     this->setTextureRect(sf::IntRect(0, wierszTextury * wysokosc_klatki,(int)this->getSize().x,wysokosc_klatki));
 }
 
+//zwraca informacje czy jest zniszczony
 bool Stone::czyZniszczony() const {
 	return m_jestZniszczony;
 }
 
+//zwraca hp
 int Stone::getHP() const {
 	return m_punktyZycia;
 }

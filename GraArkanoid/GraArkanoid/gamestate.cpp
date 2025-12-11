@@ -10,15 +10,16 @@
 
 
 void GameStatus::capture(const Paletka& p, const Pilka& b, const std::vector<Stone>& s, const Game& g) {
-    paddlePosition = sf::Vector2f(p.getX(), p.getY());
-    ballPosition = sf::Vector2f(b.getX(), b.getY());
-    ballVelocity = sf::Vector2f(b.getVx(), b.getVy());
-
+    paddlePosition = sf::Vector2f(p.getX(), p.getY());  //zapis pozycji paletki
+    ballPosition = sf::Vector2f(b.getX(), b.getY());    //zapis pozycji pilki
+    ballVelocity = sf::Vector2f(b.getVx(), b.getVy());  //zapis predkosci pilki
     blocks.clear();
-    score = g.getScore();
-    ballRadius = b.getRadius();
+    score = g.getScore();   //zapis punktacji
+    ballRadius = b.getRadius(); //zapis promienia
 
+    //zapis danych o blokach
     for (const auto& stone : s) {
+        //zapisywanie tylko i wylacznie danych o nie zniszconych blokach
         if (!stone.czyZniszczony()) {
 
             sf::Vector2f pos = stone.getPosition();
@@ -30,6 +31,7 @@ void GameStatus::capture(const Paletka& p, const Pilka& b, const std::vector<Sto
     }
 }
 
+//zapisywanie danych do pliku
 bool GameStatus::saveToFile(const std::string& filename) const {
 
     std::ofstream file(filename);
@@ -57,12 +59,14 @@ bool GameStatus::saveToFile(const std::string& filename) const {
     return true;
 }
 
+//wyczytywanie stanu gry z plikow
 bool GameStatus::loadFromFile(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) return false;
 
     std::string label;
 
+    //wczytywanie danych i ewentualna informacja o braku poszczegolnych wartosci
     if (file >> label >> paddlePosition.x >> paddlePosition.y) {
         if (label != "PADDLE") {
             std::cerr << "Oczekiwano PADDLE. " << label << ".\n";
@@ -123,15 +127,17 @@ bool GameStatus::loadFromFile(const std::string& filename) {
     std::cout << "Stan gry wczytany.\n";
     return true;
 }
+//ustawienie wczytanego stanu gry
 void GameStatus::apply(Paletka& p, Pilka& b, std::vector<Stone>& stones, const sf::Texture& blockTexture, Game& g) {
-    p.setPosition(paddlePosition);
-    b.setPositionAndVelocity(ballPosition, ballVelocity);
-    b.setRadius(ballRadius);
-    stones.clear();
+    p.setPosition(paddlePosition);  //ustawienie pozycji paletki
+    b.setPositionAndVelocity(ballPosition, ballVelocity);   //ustawienie pozycji pilki i predkosci paletki
+    b.setRadius(ballRadius);    //ustawienie promienia paletki
+    stones.clear(); //ustawienie wyniku
 
-    sf::Vector2f size(133.667f, 25.f);
+    sf::Vector2f size(133.667f, 25.f);  //ustawienie wielkosci blokow (133.667 poniewaz 800/6 = 133.666...)
     g.setScore(score);
     for (const auto& data : blocks) {
+        //tworzenie blokow
         stones.emplace_back(sf::Vector2f(data.x, data.y), size, data.hp, blockTexture);
     }
 }

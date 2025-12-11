@@ -22,6 +22,7 @@ void Pilka::bounceY() {
 	vy = -vy;
 }
 
+//sprawdzanie kolizji ze scianami bocznymi i gornymi
 void Pilka::collideWalls(float width, float height) {
 	if (x - radius <= 0) {
 		bounceX();
@@ -37,6 +38,7 @@ void Pilka::collideWalls(float width, float height) {
 	}
 }
 
+//sprawdzanie kolizji z paletka
 bool Pilka::collidePaddle(const Paletka& p) {
 	float px = p.getX();
 	float py = p.getY();
@@ -58,6 +60,7 @@ void Pilka::draw(sf::RenderTarget& target) {
 	target.draw(shape);
 }
 
+//Ustawia pozycje i predkosc dla wczytania gry
 void Pilka::setPositionAndVelocity(const sf::Vector2f& pos, const sf::Vector2f& vel) {
 	shape.setPosition(pos);
 
@@ -68,6 +71,7 @@ void Pilka::setPositionAndVelocity(const sf::Vector2f& pos, const sf::Vector2f& 
 	vy = vel.y;
 }
 
+//gettery
 float Pilka::getX() const { return x; }
 float Pilka::getY() const { return y; }
 float Pilka::getVx() const { return vx; }
@@ -78,6 +82,7 @@ sf::FloatRect Pilka::getGlobalBounds() const {
 	return shape.getGlobalBounds();
 }
 
+//zmienny promien
 void Pilka::setRadius(float r_in) {
 	radius = r_in;
 	shape.setRadius(radius);
@@ -85,6 +90,7 @@ void Pilka::setRadius(float r_in) {
 	shape.setPosition(x, y);
 }
 
+//zmienna predkosc
 void Pilka::setVelocity(float vx_in, float vy_in) {
 	vx = vx_in;
 	vy = vy_in;
