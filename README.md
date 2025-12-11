@@ -13,7 +13,7 @@
 -esc - do wyjscia do menu głównego w trakcie gry  
 -F5 - zapis stanu gry  
 
-***Zdjecia z gry:  ***
+***Zdjecia z gry:***  
 ![Screen z gry](zdjecia%20z%20gry/gra.png)
 ![Screen z menu](zdjecia%20z%20gry/menu.png)  
 ![Screen z wygranej](zdjecia%20z%20gry/wygrana.png)  
